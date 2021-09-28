@@ -5,3 +5,5 @@ cache
 
 .env
 .DS_Store
+
+*.tgz

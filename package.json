@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "compile": "npx hardhat compile",
-    "test": "npx hardhat test"
+    "test": "npx hardhat test",
+    "release-list": "rm ./niftyup-contracts-v*.tgz && yarn pack && tar --list -zf niftyup-contracts-v*.tgz"
   },
   "author": "",
   "license": "MIT",
