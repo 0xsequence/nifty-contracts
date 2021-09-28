@@ -8,7 +8,7 @@ import { HardhatUserConfig } from 'hardhat/types'
 import { NetworkUserConfig } from 'hardhat/types'
 
 import '@nomiclabs/hardhat-waffle'
-import '@typechain/hardhat'
+// import '@typechain/hardhat' // NOTE: we do this from yarn directly after the compile
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
 
@@ -52,6 +52,22 @@ function createTestnetConfig(network: keyof typeof chainIds): NetworkUserConfig 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 const config: HardhatUserConfig = {
+  solidity: {
+    version: '0.7.4',
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 100000,
+        details: {
+          yul: true
+        }
+      }
+    }
+  },
+  paths: {
+    root: 'src',
+    tests: '../tests'
+  },
   defaultNetwork: 'hardhat',
   networks: {
     hardhat: {
@@ -63,7 +79,6 @@ const config: HardhatUserConfig = {
     polygon: createTestnetConfig('polygon-mainnet'),
     mumbai: createTestnetConfig('polygon-mumbai')
   },
-  solidity: '0.7.4',
   etherscan: {
     apiKey: POLYGONSCAN_API_KEY
   },
@@ -71,10 +86,6 @@ const config: HardhatUserConfig = {
     currency: 'USD',
     gasPrice: 100,
     enabled: process.env.REPORT_GAS ? true : false
-  },
-  typechain: {
-    outDir: 'typechain',
-    target: 'ethers-v5'
   }
 }
 
