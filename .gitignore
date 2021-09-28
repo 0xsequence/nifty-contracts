@@ -11,3 +11,5 @@ build
 coverage
 coverage.json
 cache
+
+.env
