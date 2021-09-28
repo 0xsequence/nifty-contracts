@@ -1,0 +1,43 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "src"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "yarn clean && yarn compile && yarn adapter",
+    "clean": "rimraf src/artifacts && rimraf src/gen && rimraf cache",
+    "compile": "hardhat --max-memory 4096 compile",
+    "adapter": "yarn adapter:gen && yarn adapter:build",
+    "adapter:gen": "rimraf src/gen/typechain && typechain --target ethers-v5 --out-dir src/gen/typechain \"./src/artifacts/contracts/**/*[^dbg].json\"",
+    "adapter:build": "rimraf src/gen/adapter && tsc ./src/gen/typechain/index.ts --outDir ./src/gen/adapter",
+    "test": "yarn hardhat test",
+    "release": "yarn publish src",
+    "release-list": "rm ./niftyup-contracts-v*.tgz && yarn pack && tar --list -zf niftyup-contracts-v*.tgz"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@typechain/ethers-v5": "^7.1.2",
+    "@typechain/hardhat": "^2.3.0",
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.10.1",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.4",
+    "hardhat-gas-reporter": "^1.0.4",
+    "prettier": "^2.4.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.18",
+    "solhint": "^3.3.6",
+    "solhint-plugin-prettier": "^0.0.5",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^10.2.1",
+    "typechain": "^5.1.2",
+    "typescript": "^4.4.3"
+  }
+}

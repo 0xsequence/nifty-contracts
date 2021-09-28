@@ -1,0 +1,20 @@
+{
+  "name": "niftyup-contracts",
+  "version": "0.0.2",
+  "description": "niftyup",
+  "repository": "https://github.com/0xsequence/niftyup-contracts",
+  "homepage": "https://niftyup.io",
+  "license": "Apache-2.0",
+  "main": "gen/adapter/index.js",
+  "types": "gen/typechain/index.ts",
+  "scripts": {
+    "release-list": "rm ./niftyup-contracts-v*.tgz && yarn pack && tar --list -zf niftyup-contracts-v*.tgz"
+  },
+  "author": "",
+  "dependencies": {
+    "@0xsequence/erc-1155": "^3.0.6",
+    "@openzeppelin/contracts": "^3.4.2"
+  },
+  "devDependencies": {
+  }
+}
