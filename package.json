@@ -13,7 +13,7 @@
     "adapter:gen": "rimraf src/gen/typechain && typechain --target ethers-v5 --out-dir src/gen/typechain \"./src/artifacts/contracts/**/*[^dbg].json\"",
     "adapter:build": "rimraf src/gen/adapter && tsc ./src/gen/typechain/index.ts --outDir ./src/gen/adapter",
     "test": "yarn hardhat test",
-    "release": "yarn publish src",
+    "release": "yarn publish src --access public",
     "release-list": "rm ./niftyup-contracts-v*.tgz && yarn pack && tar --list -zf niftyup-contracts-v*.tgz"
   },
   "devDependencies": {
