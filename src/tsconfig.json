@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["./gen/typechain"],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "outDir": "./gen/adapter",
+    "baseUrl": "./gen/adapter"
+  },
+  "files": []
+}
