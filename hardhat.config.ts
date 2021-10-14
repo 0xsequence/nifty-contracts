@@ -4,13 +4,11 @@ import { config as dotenvConfig } from 'dotenv'
 import { resolve } from 'path'
 dotenvConfig({ path: resolve(__dirname, './.env') })
 
-import { HardhatUserConfig } from 'hardhat/types'
-import { NetworkUserConfig } from 'hardhat/types'
+import { HardhatUserConfig , NetworkUserConfig } from 'hardhat/types'
 
 import '@nomiclabs/hardhat-waffle'
 // import '@typechain/hardhat' // NOTE: we do this from yarn directly after the compile
 import '@nomiclabs/hardhat-ethers'
-import '@nomiclabs/hardhat-waffle'
 
 import 'hardhat-gas-reporter'
 import '@nomiclabs/hardhat-etherscan'

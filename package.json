@@ -14,7 +14,9 @@
     "adapter:build": "rimraf src/gen/adapter && tsc -p ./src/tsconfig.json",
     "test": "yarn hardhat test",
     "release": "yarn publish src --access public",
-    "release-list": "cd src && rm -f ./*niftyup-contracts-v*.tgz && yarn pack && tar --list -zf *niftyup-contracts-v*.tgz"
+    "release-list": "cd src && rm -f ./*niftyup-contracts-v*.tgz && yarn pack && tar --list -zf *niftyup-contracts-v*.tgz",
+    "lint:ts": "eslint -c .eslintrc.js './**/*.ts'",
+    "lint:ts:fix": "eslint -c .eslintrc.js --fix './**/*.ts'"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
@@ -25,8 +27,12 @@
     "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.10.1",
+    "@typescript-eslint/eslint-plugin": "4.18.0",
+    "@typescript-eslint/parser": "4.18.0",
     "chai": "^4.3.4",
     "dotenv": "^10.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.7",
     "hardhat": "^2.6.4",
