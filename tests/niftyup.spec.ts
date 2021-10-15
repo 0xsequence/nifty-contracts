@@ -58,6 +58,16 @@ describe("NiftyupNFT", function () {
       })
     })
 
+    describe("ERC-165", () => {
+      it("Must return false for 0xffffffff", async () => {
+        expect(await nft.supportsInterface("0xffffffff")).equal(false)
+      })
+
+      it("Must return true for 0x01ffc9a7 (ERC-165)", async () => {
+        expect(await nft.supportsInterface("0x01ffc9a7")).equal(true)
+      })
+    })
+
     describe("mint", () => {
       it("Must mint single token with ID 0", async () => {
         await nft.mint(signers[1].address, 0, 1, "0x")
