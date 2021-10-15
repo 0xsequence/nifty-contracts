@@ -92,7 +92,7 @@ jobs:
             node_modules
             */*/node_modules
           key: ${{ runner.os }}-lerna-${{ hashFiles('**/package.json', '**/yarn.lock') }}
-      - run: yarn coverage
+      - run: yarn coverage || true
       - uses: actions/upload-artifact@v2
         with:
           name: test-coverage
