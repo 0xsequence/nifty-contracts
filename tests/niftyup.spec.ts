@@ -56,6 +56,11 @@ describe("NiftyupNFT", function () {
         const tx = nft.connect(signers[1]).transferOwnership(signers[1].address)
         await expect(tx).to.be.reverted
       })
+
+      it("Must fail to transfer ownership to address(0)", async () => {
+        const tx = nft.transferOwnership(ethers.constants.AddressZero)
+        await expect(tx).to.be.reverted
+      })
     })
 
     describe("ERC-165", () => {
