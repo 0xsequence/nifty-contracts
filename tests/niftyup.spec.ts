@@ -51,6 +51,11 @@ describe("NiftyupNFT", function () {
         await nft.renounceOwnership()
         expect(await nft.owner()).to.equal(ethers.constants.AddressZero)
       })
+
+      it("Must fail to transfer ownership if not owner", async () => {
+        const tx = nft.connect(signers[1]).transferOwnership(signers[1].address)
+        await expect(tx).to.be.reverted
+      })
     })
 
     describe("mint", () => {
