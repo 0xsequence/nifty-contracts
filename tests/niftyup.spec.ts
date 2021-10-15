@@ -6,7 +6,7 @@ import { expect } from "chai"
 
 async function nftFromTx(tx: Promise<TransactionResponse> | TransactionResponse) {
   const log = (await (await tx).wait()).logs.find((l) => l.topics.length === 4)
-  const addr = ethers.utils.defaultAbiCoder.decode(['address'], log?.topics[3] ?? '')[0]
+  const addr = ethers.utils.defaultAbiCoder.decode(["address"], log?.topics[3] ?? "")[0]
   const Nft = await ethers.getContractFactory("NiftyupNFT")
   return Nft.attach(addr)
 }
@@ -41,7 +41,19 @@ describe("NiftyupNFT", function () {
       await expect(tx).to.be.reverted
     })
 
-    describe('mint', () => {
+    describe("ownable", () => {
+      it("Must transfer ownership to a different owner", async () => {
+        await nft.transferOwnership(signers[1].address)
+        expect(await nft.owner()).to.equal(signers[1].address)
+      })
+
+      it("Must renonunce ownership", async () => {
+        await nft.renounceOwnership()
+        expect(await nft.owner()).to.equal(ethers.constants.AddressZero)
+      })
+    })
+
+    describe("mint", () => {
       it("Must mint single token with ID 0", async () => {
         await nft.mint(signers[1].address, 0, 1, "0x")
         expect(await nft.balanceOf(signers[1].address, 0)).to.equal(1)
@@ -68,7 +80,7 @@ describe("NiftyupNFT", function () {
       })
     })
 
-    describe('batchMint', () => {
+    describe("batchMint", () => {
       it("Must mint batch tokens", async () => {
         await nft.batchMint(signers[1].address, [2, 3, 4], [1, 2, 3], "0x")
         expect(await nft.balanceOf(signers[1].address, 2)).to.equal(1)
@@ -87,7 +99,7 @@ describe("NiftyupNFT", function () {
       })
     })
 
-    describe('burn', () => {
+    describe("burn", () => {
       it("Must burn tokens", async () => {
         await nft.mint(signers[1].address, 2, 1, "0x")
         await nft.connect(signers[1]).burn(2, 1)
@@ -112,7 +124,7 @@ describe("NiftyupNFT", function () {
       })
     })
 
-    describe('batchBurn', () => {
+    describe("batchBurn", () => {
       it("Must burn tokens", async () => {
         await nft.mint(signers[1].address, 0, 1, "0x")
         await nft.mint(signers[1].address, 3, 4, "0x")
@@ -144,7 +156,7 @@ describe("NiftyupNFT", function () {
       })
     })
 
-    describe('metadata URI', () => {
+    describe("metadata URI", () => {
       it("Must initially return empty URI", async () => {
         expect(await nft.uri(1)).to.equal("1.json")
       })
