@@ -28,6 +28,7 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
     "burn(uint256,uint256)": FunctionFragment;
     "getIDBinIndex(uint256)": FunctionFragment;
     "getValueInBin(uint256,uint256)": FunctionFragment;
+    "initialize(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -69,6 +70,7 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
     functionFragment: "getValueInBin",
     values: [BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "initialize", values: [string]): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
@@ -124,6 +126,7 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
     functionFragment: "getValueInBin",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
@@ -298,6 +301,11 @@ export class NiftyupNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    initialize(
+      _owner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     isApprovedForAll(
       _owner: string,
       _operator: string,
@@ -403,6 +411,11 @@ export class NiftyupNFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  initialize(
+    _owner: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   isApprovedForAll(
     _owner: string,
     _operator: string,
@@ -507,6 +520,8 @@ export class NiftyupNFT extends BaseContract {
       _index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    initialize(_owner: string, overrides?: CallOverrides): Promise<void>;
 
     isApprovedForAll(
       _owner: string,
@@ -726,6 +741,11 @@ export class NiftyupNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    initialize(
+      _owner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     isApprovedForAll(
       _owner: string,
       _operator: string,
@@ -830,6 +850,11 @@ export class NiftyupNFT extends BaseContract {
       _binValues: BigNumberish,
       _index: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    initialize(
+      _owner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(

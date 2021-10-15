@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "Ownable",
-  "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+  "sourceName": "contracts/utils/Ownable.sol",
   "abi": [
     {
       "anonymous": false,

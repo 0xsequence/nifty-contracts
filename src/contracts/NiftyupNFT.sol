@@ -1,11 +1,25 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.4;
+pragma solidity ^0.7.0;
 
 import '@0xsequence/erc-1155/contracts/tokens/ERC1155PackedBalance/ERC1155MintBurnPackedBalance.sol';
 import '@0xsequence/erc-1155/contracts/tokens/ERC1155/ERC1155Metadata.sol';
-import '@openzeppelin/contracts/access/Ownable.sol';
 
-contract NiftyupNFT is ERC1155MintBurnPackedBalance, ERC1155Metadata, Ownable {
+import './utils/Initializable.sol';
+import './utils/Ownable.sol';
+
+
+contract NiftyupNFT is Initializable, Ownable, ERC1155MintBurnPackedBalance, ERC1155Metadata {
+  /**
+   * @notice Constructor for proxy instances, initializes the contract with given values
+   * @dev This method can only be called once
+   * @param _owner             Owner of the NFT contract
+   */
+  function initialize(
+    address _owner
+  ) external initializer {
+    _transferOwnership(_owner);
+  }
+
   /**
    * @notice Mint _amount of tokens of a given id, if allowed.
    * @param _to      The address to mint tokens to
