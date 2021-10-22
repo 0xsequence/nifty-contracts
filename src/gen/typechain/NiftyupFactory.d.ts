@@ -21,19 +21,22 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface NiftyupFactoryInterface extends ethers.utils.Interface {
   functions: {
-    "create(address)": FunctionFragment;
-    "implementation()": FunctionFragment;
+    "create(address,uint256)": FunctionFragment;
+    "implementations(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "create", values: [string]): string;
   encodeFunctionData(
-    functionFragment: "implementation",
-    values?: undefined
+    functionFragment: "create",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "implementations",
+    values: [BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "implementation",
+    functionFragment: "implementations",
     data: BytesLike
   ): Result;
 
@@ -94,23 +97,38 @@ export class NiftyupFactory extends BaseContract {
   functions: {
     create(
       _owner: string,
+      _bits: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    implementation(overrides?: CallOverrides): Promise<[string]>;
+    implementations(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   create(
     _owner: string,
+    _bits: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  implementation(overrides?: CallOverrides): Promise<string>;
+  implementations(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
-    create(_owner: string, overrides?: CallOverrides): Promise<string>;
+    create(
+      _owner: string,
+      _bits: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    implementation(overrides?: CallOverrides): Promise<string>;
+    implementations(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -136,18 +154,26 @@ export class NiftyupFactory extends BaseContract {
   estimateGas: {
     create(
       _owner: string,
+      _bits: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    implementation(overrides?: CallOverrides): Promise<BigNumber>;
+    implementations(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     create(
       _owner: string,
+      _bits: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    implementation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    implementations(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

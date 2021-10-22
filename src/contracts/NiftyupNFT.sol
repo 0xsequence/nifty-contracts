@@ -9,6 +9,8 @@ import './utils/Ownable.sol';
 
 
 contract NiftyupNFT is Initializable, Ownable, ERC1155MintBurnPackedBalance, ERC1155Metadata {
+  constructor (uint256 _bits) ERC1155MintBurnPackedBalance(_bits) {}
+
   /**
    * @notice Constructor for proxy instances, initializes the contract with given values
    * @dev This method can only be called once

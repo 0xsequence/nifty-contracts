@@ -25,7 +25,7 @@ describe("NiftyupNFT", function () {
     let nft: Contract
 
     beforeEach(async () => {
-      nft = await nftFromTx(factory.create(signers[0].address))
+      nft = await nftFromTx(factory.create(signers[0].address, 32))
     })
 
     it("Must have code", async () => {

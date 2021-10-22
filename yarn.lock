@@ -2,10 +2,9 @@
 # yarn lockfile v1
 
 
-"@0xsequence/erc-1155@^3.0.6":
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/@0xsequence/erc-1155/-/erc-1155-3.0.6.tgz#10f627d5550b470aa8f0e39163ac9d7a58880596"
-  integrity sha512-W4TdV9n4L/zDo8R7Chaa9rLsOknOIBoqtBsxC6n3gKuTXgDCI5KZglhK/yP1DWFG9St85wzmXPelfC6pX9vc3g==
+"@0xsequence/erc-1155@https://gitpkg.now.sh/0xsequence/erc-1155/src?custom-bits":
+  version "3.0.7"
+  resolved "https://gitpkg.now.sh/0xsequence/erc-1155/src?custom-bits#f5a85667d2e6b4cc3e5568ceded4fe58cd80bac0"
 
 "@babel/code-frame@^7.0.0":
   version "7.14.5"
