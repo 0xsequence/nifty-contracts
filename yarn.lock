@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@0xsequence/erc-1155@https://gitpkg.now.sh/0xsequence/erc-1155/src?a664bd16734c53f71fd919a640dd36bb37e3500d":
+  version "4.0.0"
+  resolved "https://gitpkg.now.sh/0xsequence/erc-1155/src?a664bd16734c53f71fd919a640dd36bb37e3500d#4feee014476afc68cf8501e5d7e6f2f4bcc39e09"
+
 "@0xsequence/erc-1155@https://gitpkg.now.sh/0xsequence/erc-1155/src?custom-bits":
   version "3.0.7"
   resolved "https://gitpkg.now.sh/0xsequence/erc-1155/src?custom-bits#f5a85667d2e6b4cc3e5568ceded4fe58cd80bac0"
