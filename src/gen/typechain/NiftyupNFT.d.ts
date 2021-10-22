@@ -21,6 +21,7 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface NiftyupNFTInterface extends ethers.utils.Interface {
   functions: {
+    "IDS_BITS_SIZE()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "batchBurn(uint256[],uint256[])": FunctionFragment;
@@ -28,6 +29,7 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
     "burn(uint256,uint256)": FunctionFragment;
     "getIDBinIndex(uint256)": FunctionFragment;
     "getValueInBin(uint256,uint256)": FunctionFragment;
+    "initialize(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -41,6 +43,10 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
     "uri(uint256)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "IDS_BITS_SIZE",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [string, BigNumberish]
@@ -69,6 +75,7 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
     functionFragment: "getValueInBin",
     values: [BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "initialize", values: [string]): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
@@ -108,6 +115,10 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
 
+  decodeFunctionResult(
+    functionFragment: "IDS_BITS_SIZE",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfBatch",
@@ -124,6 +135,7 @@ interface NiftyupNFTInterface extends ethers.utils.Interface {
     functionFragment: "getValueInBin",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
@@ -255,6 +267,8 @@ export class NiftyupNFT extends BaseContract {
   interface: NiftyupNFTInterface;
 
   functions: {
+    IDS_BITS_SIZE(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     balanceOf(
       _owner: string,
       _id: BigNumberish,
@@ -297,6 +311,11 @@ export class NiftyupNFT extends BaseContract {
       _index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    initialize(
+      _owner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     isApprovedForAll(
       _owner: string,
@@ -360,6 +379,8 @@ export class NiftyupNFT extends BaseContract {
     uri(_id: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
   };
 
+  IDS_BITS_SIZE(overrides?: CallOverrides): Promise<BigNumber>;
+
   balanceOf(
     _owner: string,
     _id: BigNumberish,
@@ -402,6 +423,11 @@ export class NiftyupNFT extends BaseContract {
     _index: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  initialize(
+    _owner: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   isApprovedForAll(
     _owner: string,
@@ -465,6 +491,8 @@ export class NiftyupNFT extends BaseContract {
   uri(_id: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    IDS_BITS_SIZE(overrides?: CallOverrides): Promise<BigNumber>;
+
     balanceOf(
       _owner: string,
       _id: BigNumberish,
@@ -507,6 +535,8 @@ export class NiftyupNFT extends BaseContract {
       _index: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    initialize(_owner: string, overrides?: CallOverrides): Promise<void>;
 
     isApprovedForAll(
       _owner: string,
@@ -683,6 +713,8 @@ export class NiftyupNFT extends BaseContract {
   };
 
   estimateGas: {
+    IDS_BITS_SIZE(overrides?: CallOverrides): Promise<BigNumber>;
+
     balanceOf(
       _owner: string,
       _id: BigNumberish,
@@ -724,6 +756,11 @@ export class NiftyupNFT extends BaseContract {
       _binValues: BigNumberish,
       _index: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    initialize(
+      _owner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     isApprovedForAll(
@@ -789,6 +826,8 @@ export class NiftyupNFT extends BaseContract {
   };
 
   populateTransaction: {
+    IDS_BITS_SIZE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     balanceOf(
       _owner: string,
       _id: BigNumberish,
@@ -830,6 +869,11 @@ export class NiftyupNFT extends BaseContract {
       _binValues: BigNumberish,
       _index: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    initialize(
+      _owner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(

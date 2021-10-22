@@ -12,6 +12,7 @@ import '@nomiclabs/hardhat-ethers'
 
 import 'hardhat-gas-reporter'
 import '@nomiclabs/hardhat-etherscan'
+import "solidity-coverage"
 
 const chainIds = {
   hardhat: 31337,

@@ -12,9 +12,8 @@
   },
   "author": "",
   "dependencies": {
-    "@0xsequence/erc-1155": "^3.0.6",
+    "@0xsequence/erc-1155": "https://gitpkg.now.sh/0xsequence/erc-1155/src?a664bd16734c53f71fd919a640dd36bb37e3500d",
     "@openzeppelin/contracts": "^3.4.2"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

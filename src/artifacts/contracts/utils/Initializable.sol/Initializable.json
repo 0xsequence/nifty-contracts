@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "Context",
-  "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+  "contractName": "Initializable",
+  "sourceName": "contracts/utils/Initializable.sol",
   "abi": [],
   "bytecode": "0x",
   "deployedBytecode": "0x",
