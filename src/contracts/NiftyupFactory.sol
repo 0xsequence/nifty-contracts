@@ -8,7 +8,8 @@ import "./NiftyupNFT.sol";
 contract NiftyupFactory {
   mapping(uint256 => NiftyupNFT) public implementations;
 
-  event CreatedNFT(address indexed creator, address indexed owner, address indexed nft);
+  event CreatedNFTContract(address indexed creator, address indexed owner, address indexed nft);
+  event CreatedImplementationContract(uint256 indexed bits, address indexed implementation);
 
   /**
    * @notice Creates a new NiftyNFT proxy contract instance
@@ -20,7 +21,7 @@ contract NiftyupFactory {
     NiftyupNFT clone = NiftyupNFT(Clones.clone(implementationFor(_bits)));
     clone.initialize(_owner);
 
-    emit CreatedNFT(msg.sender, _owner, address(clone));
+    emit CreatedNFTContract(msg.sender, _owner, address(clone));
 
     return address(clone);
   }
@@ -34,6 +35,8 @@ contract NiftyupFactory {
     }
 
     NiftyupNFT imp = new NiftyupNFT(_bits);
+    emit CreatedImplementationContract(_bits, address(imp));
+
     imp.initialize(address(this));
     implementations[_bits] = imp;
     return address(imp);

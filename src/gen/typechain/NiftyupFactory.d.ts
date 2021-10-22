@@ -41,13 +41,21 @@ interface NiftyupFactoryInterface extends ethers.utils.Interface {
   ): Result;
 
   events: {
-    "CreatedNFT(address,address,address)": EventFragment;
+    "CreatedImplementationContract(uint256,address)": EventFragment;
+    "CreatedNFTContract(address,address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "CreatedNFT"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "CreatedImplementationContract"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CreatedNFTContract"): EventFragment;
 }
 
-export type CreatedNFTEvent = TypedEvent<
+export type CreatedImplementationContractEvent = TypedEvent<
+  [BigNumber, string] & { bits: BigNumber; implementation: string }
+>;
+
+export type CreatedNFTContractEvent = TypedEvent<
   [string, string, string] & { creator: string; owner: string; nft: string }
 >;
 
@@ -132,7 +140,23 @@ export class NiftyupFactory extends BaseContract {
   };
 
   filters: {
-    "CreatedNFT(address,address,address)"(
+    "CreatedImplementationContract(uint256,address)"(
+      bits?: BigNumberish | null,
+      implementation?: string | null
+    ): TypedEventFilter<
+      [BigNumber, string],
+      { bits: BigNumber; implementation: string }
+    >;
+
+    CreatedImplementationContract(
+      bits?: BigNumberish | null,
+      implementation?: string | null
+    ): TypedEventFilter<
+      [BigNumber, string],
+      { bits: BigNumber; implementation: string }
+    >;
+
+    "CreatedNFTContract(address,address,address)"(
       creator?: string | null,
       owner?: string | null,
       nft?: string | null
@@ -141,7 +165,7 @@ export class NiftyupFactory extends BaseContract {
       { creator: string; owner: string; nft: string }
     >;
 
-    CreatedNFT(
+    CreatedNFTContract(
       creator?: string | null,
       owner?: string | null,
       nft?: string | null
